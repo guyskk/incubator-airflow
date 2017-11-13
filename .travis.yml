@@ -35,10 +35,6 @@ addons:
       - oracle-java8-installer
       - python-selinux
   postgresql: "9.2"
-python:
-  - "2.7"
-  - "3.4"
-  - "3.6"
 env:
   global:
     - TRAVIS_CACHE=$HOME/.travis_cache/
@@ -47,51 +43,35 @@ env:
     # Travis on google cloud engine has a global /etc/boto.cfg that
     # does not work with python 3
     - BOTO_CONFIG=/tmp/bogusvalue
-  matrix:
-    - TOX_ENV=py27-cdh-airflow_backend_mysql
-    - TOX_ENV=py27-cdh-airflow_backend_sqlite
-    - TOX_ENV=py27-cdh-airflow_backend_postgres
+matrix:
+  include:
+    - python: "2.7"
+      env: TOX_ENV=py27-cdh-airflow_backend_mysql
+    - python: "2.7"
+      env: TOX_ENV=py27-cdh-airflow_backend_sqlite
+    - python: "2.7"
+      env: TOX_ENV=py27-cdh-airflow_backend_postgres
 #    - TOX_ENV=py27-hdp-airflow_backend_mysql
 #    - TOX_ENV=py27-hdp-airflow_backend_sqlite
 #    - TOX_ENV=py27-hdp-airflow_backend_postgres
-    - TOX_ENV=py34-cdh-airflow_backend_mysql
-    - TOX_ENV=py34-cdh-airflow_backend_sqlite
-    - TOX_ENV=py34-cdh-airflow_backend_postgres
+    - python: "3.4"
+      env: TOX_ENV=py34-cdh-airflow_backend_mysql
+    - python: "3.4"
+      env: TOX_ENV=py34-cdh-airflow_backend_sqlite
+    - python: "3.4"
+      env: TOX_ENV=py34-cdh-airflow_backend_postgres
 #    - TOX_ENV=py34-hdp-airflow_backend_mysql
 #    - TOX_ENV=py34-hdp-airflow_backend_sqlite
 #    - TOX_ENV=py34-hdp-airflow_backend_postgres
-    - TOX_ENV=py36-cdh-airflow_backend_mysql
-    - TOX_ENV=py36-cdh-airflow_backend_sqlite
-    - TOX_ENV=py36-cdh-airflow_backend_postgres
+    - python: "3.6"
+      env: TOX_ENV=py36-cdh-airflow_backend_mysql
+    - python: "3.6"
+      env: TOX_ENV=py36-cdh-airflow_backend_sqlite
+    - python: "3.6"
+      env: TOX_ENV=py36-cdh-airflow_backend_postgres
 #    - TOX_ENV=py36-hdp-airflow_backend_mysql
 #    - TOX_ENV=py36-hdp-airflow_backend_sqlite
 #    - TOX_ENV=py36-hdp-airflow_backend_postgres
-matrix:
-  exclude:
-    - python: "3.4"
-      env: TOX_ENV=py27-cdh-airflow_backend_mysql
-    - python: "3.4"
-      env: TOX_ENV=py27-cdh-airflow_backend_sqlite
-    - python: "3.4"
-      env: TOX_ENV=py27-cdh-airflow_backend_postgres
-    - python: "3.4"
-      env: TOX_ENV=py27-hdp-airflow_backend_mysql
-    - python: "3.4"
-      env: TOX_ENV=py27-hdp-airflow_backend_sqlite
-    - python: "3.4"
-      env: TOX_ENV=py27-hdp-airflow_backend_postgres
-    - python: "2.7"
-      env: TOX_ENV=py34-cdh-airflow_backend_mysql
-    - python: "2.7"
-      env: TOX_ENV=py34-cdh-airflow_backend_sqlite
-    - python: "2.7"
-      env: TOX_ENV=py34-cdh-airflow_backend_postgres
-    - python: "2.7"
-      env: TOX_ENV=py34-hdp-airflow_backend_mysql
-    - python: "2.7"
-      env: TOX_ENV=py34-hdp-airflow_backend_sqlite
-    - python: "2.7"
-      env: TOX_ENV=py34-hdp-airflow_backend_postgres
 cache:
   directories:
     - $HOME/.wheelhouse/
