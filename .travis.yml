@@ -38,6 +38,7 @@ addons:
 python:
   - "2.7"
   - "3.4"
+  - "3.6"
 env:
   global:
     - TRAVIS_CACHE=$HOME/.travis_cache/
@@ -59,6 +60,12 @@ env:
 #    - TOX_ENV=py34-hdp-airflow_backend_mysql
 #    - TOX_ENV=py34-hdp-airflow_backend_sqlite
 #    - TOX_ENV=py34-hdp-airflow_backend_postgres
+    - TOX_ENV=py36-cdh-airflow_backend_mysql
+    - TOX_ENV=py36-cdh-airflow_backend_sqlite
+    - TOX_ENV=py36-cdh-airflow_backend_postgres
+#    - TOX_ENV=py36-hdp-airflow_backend_mysql
+#    - TOX_ENV=py36-hdp-airflow_backend_sqlite
+#    - TOX_ENV=py36-hdp-airflow_backend_postgres
 matrix:
   exclude:
     - python: "3.4"
